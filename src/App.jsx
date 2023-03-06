@@ -1,11 +1,12 @@
+import React from 'react';
 import { useState, useEffect } from 'react'
-import { Text, Input, Button } from "@nextui-org/react";
+import { Text, Input, Button, Card } from "@nextui-org/react";
 import Content from './components/content/Content';
+import Alert from './components/alert/Alert';
 
 import { ethers } from 'ethers';
 import ERC20ABI from './ERC20ABI.json';
 // import Form from './components/form/Form';
-
 import './App.css'
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
     } else{
       setError('Ethereum not present on page. Install MetaMask')
     }
-    
+
     return () => {}
   }, [wallet.address])
 
@@ -93,7 +94,7 @@ function App() {
                 helperColor="error"
                 helperText={!destination.validated && "Please enter a valid Ethereum address"}
                 clearable 
-                css={{w:'400px',mb:"7%"}}
+                css={{w:'100%',mb:"7%"}}
               />
 
               <Input 
@@ -103,15 +104,13 @@ function App() {
                 value={destination.ether}
                 onChange={e=>setDestination(prevState=>{return{...prevState, ether:e.target.value}})}
                 clearable 
-                css={{w:'400px',mb:"7%"}}
+                css={{w:'100%',mb:"7%"}}
               />
 
               <Button type="submit" css={{w:'100%'}}>TRANSFER</Button>
             </form>
           </div>
-
-          {/* <Button onPress={getUserWalletData}>Click Me</Button> */}
-
+          <Alert type="success" />
         </div>
         <div className='right'></div>
     </div>

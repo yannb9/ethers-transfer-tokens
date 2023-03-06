@@ -1,0 +1,10 @@
+.alert{
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    /* display: flex;
+    flex-direction: row; */
+
+    font-size: 12px;
+    margin-top: 5%;
+}
