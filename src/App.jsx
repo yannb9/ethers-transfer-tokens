@@ -88,14 +88,6 @@ function App() {
     {
       title:'Goerli Balance:',
       subtitle: wallet.goerli
-    },
-    {
-      title:'Account #1',
-      subtitle:'0x5aB10442D4D0b52Ed035be229AaD308144360Df8'
-    },
-    {
-      title:'Account #2',
-      subtitle:'0xca7243f6B7D56790adE5a6f1f2121e7d7b8B7f26'
     }
   ]
 
