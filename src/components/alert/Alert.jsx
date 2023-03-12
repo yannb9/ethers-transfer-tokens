@@ -15,13 +15,13 @@ export default function Alert({type, text}) {
       break;
     case 'warning':
       icon= <Warning />
-      bg = '#3a2503'
-      color = '#f6ad37';
+      bg = '#fdefd8'
+      color = '#b97509';
       break;
     case 'error':
       icon= <Error />
-      bg = '#300313'
-      color = '#f4256d';
+      bg = '#fdd8e5'
+      color = '#f31260';
       break;
     default:
       color = 'gray';
@@ -29,7 +29,8 @@ export default function Alert({type, text}) {
 
   return (
     <div className="alert" style={{backgroundColor: bg, color: color}}>
-      hello there askdlfjhalskdjfhlasjdhflaksdjfhalskdjfh
+      {icon}
+      <div className='text'  style={{marginLeft:'10px'}}>{text}</div>
   </div>
   )
 }
