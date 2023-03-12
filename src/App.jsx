@@ -122,7 +122,7 @@ function App() {
               <InputField
                 type="number" 
                 name="eth-amount"
-                labelPlaceholder="Amount in ⧫"
+                labelPlaceholder="Amount in ⧫ (1 = 1000 so put 1000)"
                 disabled={isLoading}
                 // value={destination.ether}
                 // value={1000}
