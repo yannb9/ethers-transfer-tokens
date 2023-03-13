@@ -51,11 +51,6 @@ function App() {
     };
   }, [transactions]);
 
-  const getGasPrices = async() =>{
-    const provider = new ethers.BrowserProvider(window.ethereum)
-    const gasPrice = await provider.getGasPrice();
-    return gasPrice;
-  }
 
   const handleSubmitTransfer = async (event) => {
     event.preventDefault();
@@ -65,8 +60,8 @@ function App() {
     const recipientAmount = data.get('eth-amount');
     const regex = /^0x[a-fA-F0-9]{40}$/;
     const ethReq = wallet.erc20_s;
-    const gasPrice = getGasPrices();
-    console.log(gasPrice)
+    // const gasPrice = getGasPrices();
+    // console.log(gasPrice)
 
     if(!regex.test(recipientAddress)){
       setError('Please enter a valid Ethereum address')
