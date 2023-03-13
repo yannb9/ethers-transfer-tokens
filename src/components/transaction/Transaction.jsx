@@ -27,7 +27,10 @@ export default function Transaction({from, to, amount, status, hash, date}) {
             </Text>
 
             <Text weight="bold" css={{fs:'14px', color:'#252525'}}>Transaction Link:
-              <Text span weight="normal" css={{ml:'10px', color: '#7e868c', fs:'14px'}}>Link</Text>
+              <Text span weight="normal" css={{ml:'10px', color: '#7e868c', fs:'14px'}}></Text>
+              <Link target="_blank" href={`https://goerli.etherscan.io/tx/${hash}`}>
+              {`https://goerli.etherscan.io/tx/${hash}`}
+                </Link>
             </Text>
             
           </Collapse>

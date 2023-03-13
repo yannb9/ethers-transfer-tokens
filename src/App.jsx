@@ -122,7 +122,7 @@ function App() {
               <InputField
                 type="number" 
                 name="eth-amount"
-                labelPlaceholder="Amount in ⧫ (1 = 1000 so put 1000)"
+                labelPlaceholder="Token Amount in ⧫ERC (1 = 1000 so put 1000)"
                 disabled={isLoading}
                 // value={destination.ether}
                 // value={1000}
@@ -130,7 +130,7 @@ function App() {
               />
               {
                 isLoading ? <Loading /> :
-                <Button type="submit" css={{w:'100%'}}>TRANSFER</Button>
+                <Button type="submit" css={{w:'100%'}}>SEND TOKENS</Button>
               }
             </form>
           </div>
@@ -158,6 +158,7 @@ function App() {
             from={tx.from}
             to={tx.to}
             amount={tx.amount}
+            hash={tx.hash}
             status=''
             date={tx.date}
           />)}
