@@ -1,16 +1,24 @@
 import React from 'react'
-import { Input } from '@nextui-org/react';
+import { Input } from '@nextui-org/react'
 
-export default function InputField({ name, labelPlaceholder, disabled, value, onChange, helperText, clearable }) {
+export default function InputField ({
+  name,
+  labelPlaceholder,
+  disabled,
+  value,
+  onChange,
+  helperText,
+  clearable
+}) {
   return (
     <Input
-      type="text"
+      type='text'
       name={name}
       labelPlaceholder={labelPlaceholder}
       disabled={disabled}
       value={value}
       onChange={onChange}
-      helperColor="error"
+      helperColor='error'
       helperText={helperText}
       clearable={clearable}
       css={{ w: '100%', mb: '7%' }}
