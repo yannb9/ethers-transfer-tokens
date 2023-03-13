@@ -16,6 +16,8 @@ import './App.css'
 function App() {
   const {wallet} = useFetchEthAccData();
   const [transactions, setTransactions] = useState([])
+  const [txStatus, setTxStatus] = useState();
+
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -25,7 +27,7 @@ function App() {
     const erc20 = new ethers.Contract(ERC20ABI_ADDRESS, ERC20ABI, provider);
   
     const listener = (from, to, amount, event) => {
-      let txArray = [...transactions, {
+      const txArray = [...transactions, {
         from,
         to,
         amount: String(amount),
@@ -68,10 +70,10 @@ function App() {
       return;
     }
     try {
-      await ethReq.transfer(recipientAddress, recipientAmount).then(e=>console.log(e));
+      await ethReq.transfer(recipientAddress, recipientAmount)
     } catch (err) {
-      err = err.message.match(/(^.*?(?=\())/g);       // extracting the main message from the log
-      setError(`${err}. Please try again`)
+      const errMsg = err.message.match(/(^.*?(?=\())/g)      // extracting the main message from the log
+      setError(`${errMsg}. Please try again`)
       setIsLoading(false)
     }
   };
@@ -144,7 +146,7 @@ function App() {
             :
             error ?
             <Alert type='error' text={error}/>
-            : transactions[transactions.length -1]?.date  == new Intl.DateTimeFormat('en-us', {
+            : transactions[transactions.length -1]?.date  === new Intl.DateTimeFormat('en-us', {
               year: 'numeric',
               month: 'numeric',
               day: 'numeric',

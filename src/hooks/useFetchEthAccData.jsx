@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ethers } from 'ethers';
 import ERC20ABI from '../ERC20ABI.json';
-
 const ERC20ABI_ADDRESS = '0xE72c69b02B4B134fb092d0D083B287cf595ED1E6';
 
 export const useFetchEthAccData = () => {
@@ -23,24 +22,23 @@ export const useFetchEthAccData = () => {
         const signer = await provider.getSigner();
         const erc20_p = new ethers.Contract(ERC20ABI_ADDRESS, ERC20ABI, provider);
         const erc20_s = new ethers.Contract(ERC20ABI_ADDRESS, ERC20ABI, signer);
-  
+
         const accountAddress = await signer.getAddress();
-        const balance = await erc20_p.balanceOf(accountAddress);
-        const goerli = await provider.getBalance(accountAddress);
+        const accountBalance = await erc20_p.balanceOf(accountAddress);
+        const goerliBalance = await provider.getBalance(accountAddress);
   
         setWallet((prevState) => ({
           ...prevState,
           address: accountAddress,
-          ether: ethers.formatEther(balance),
-          hord6: ethers.formatUnits(balance, 6),
-          goerli: ethers.formatEther(goerli, 18),
+          ether: ethers.formatEther(accountBalance),
+          hord6: ethers.formatUnits(accountBalance, 6),
+          goerli: ethers.formatEther(goerliBalance, 18),
           erc20_p,
           erc20_s,
           isLoading:false
         }));
 
       } catch (error) {
-        console.error(error);
         setWallet((prevState)=>({
           ...prevState,
           error: error.message
