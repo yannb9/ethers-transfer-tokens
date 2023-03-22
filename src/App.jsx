@@ -54,7 +54,6 @@ function App() {
         <div className='left'>
           <div className='content'>
             <Text h1 className="title">Transfer Ethereum Tokens</Text>
-            0xca7243f6B7D56790adE5a6f1f2121e7d7b8B7f26
             {wallet.isLoading ? <Loading /> 
             : 
             userWalletData.map(data=>
