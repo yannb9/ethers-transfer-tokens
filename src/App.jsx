@@ -1,110 +1,110 @@
-import React, { useState, useEffect } from 'react';
-import { Text, Button, Loading } from "@nextui-org/react";
+import React, { useState, useEffect } from 'react'
+import { Text, Button, Loading } from '@nextui-org/react'
 import { v4 } from 'uuid'
 
-import { useHandleGetAccount } from './hooks/useHandleGetAccount';
-import { useHandleSubmitTransfer } from './hooks/useHandleSubmitTransfer';
+import { useHandleGetAccount } from './hooks/useHandleGetAccount'
+import { useHandleSubmitTransfer } from './hooks/useHandleSubmitTransfer'
 
-import Header from './components/header/Header';
-import Alert from './components/alert/Alert';
-import InputField from './components/inputField/InputField';
-import Transaction from './components/transaction/Transaction';
+import Header from './components/header/Header'
+import Alert from './components/alert/Alert'
+import InputField from './components/inputField/InputField'
+import Transaction from './components/transaction/Transaction'
 import './App.css'
 
-function App() {
-  const { wallet } = useHandleGetAccount();
-  const [formData, transactions, handleSubmit] = useHandleSubmitTransfer();
+function App () {
+  const { wallet } = useHandleGetAccount()
+  const [formData, transactions, handleSubmit] = useHandleSubmitTransfer()
   const [alert, setAlert] = useState('')
 
-
-  useEffect(()=>{
-    let alertSettings = {};
-    if(wallet.status === 'error'){
-      alertSettings = {status: wallet.status, message: wallet.message};
+  useEffect(() => {
+    let alertSettings = {}
+    if (wallet.status === 'error') {
+      alertSettings = { status: wallet.status, message: wallet.message }
     }
-    alertSettings = {status: formData.status, message: formData.message};
-    setAlert(alertSettings);
-    let resetAlert = setTimeout(() => {
-      setAlert({});
-    }, 15000);
+    alertSettings = { status: formData.status, message: formData.message }
+    setAlert(alertSettings)
+    const resetAlert = setTimeout(() => {
+      setAlert({})
+    }, 15000)
 
-    return () =>{
+    return () => {
       clearTimeout(resetAlert)
     }
-
-  },[wallet, formData])
+  }, [wallet, formData])
 
   const userWalletData = [
     {
-      title:'Acc Address:',
+      title: 'Acc Address:',
       subtitle: wallet?.address
     },
     {
-      title:'HORD6 Balance:',
+      title: 'HORD6 Balance:',
       subtitle: Number(wallet?.hord6).toLocaleString()
     },
     {
-      title:'Goerli Balance:',
+      title: 'Goerli Balance:',
       subtitle: Number(wallet?.goerli).toFixed(5)
     }
   ]
 
   return (
-    <div className="App">
-        <div className='left'>
-          <div className='content'>
-            <Text h1 className="title">Transfer Ethereum Tokens</Text>
-            {wallet.isLoading ? <Loading /> 
-            : 
-            userWalletData.map(data=>
-              <Header
-              key={v4()}
-              title={data.title}
-              subtitle={data.subtitle}
-              />)
-            }
+    <div className='App'>
+      <div className='left'>
+        <div className='content'>
+          <Text h1 className='title'>
+            Transfer Ethereum Tokens
+          </Text>
+          {wallet.isLoading
+            ? (
+              <Loading />
+              )
+            : (
+                userWalletData.map((data) => (
+                  <Header key={v4()} title={data.title} subtitle={data.subtitle} />
+                ))
+              )}
 
-              <div className='form-container'>
-                  <form onSubmit={handleSubmit}>
-                      <InputField 
-                          type="text" 
-                          name="eth-address"
-                          labelPlaceholder="ETH Address" 
-                          disabled={formData.isLoading}
-                          clearable 
-                      />
+          <div className='form-container'>
+            <form onSubmit={handleSubmit}>
+              <InputField
+                type='text'
+                name='eth-address'
+                labelPlaceholder='ETH Address'
+                disabled={formData.isLoading}
+                clearable
+              />
 
-                      <InputField
-                          type="number" 
-                          name="eth-amount"
-                          labelPlaceholder="HORD6 Transfer Amount"
-                          disabled={formData.isLoading}
-                          clearable 
-                      />
+              <InputField
+                type='number'
+                name='eth-amount'
+                labelPlaceholder='HORD6 Transfer Amount'
+                disabled={formData.isLoading}
+                clearable
+              />
 
-                      { formData.isLoading ? <Loading /> :
-                          <Button type="submit" css={{w:'100%'}}>SEND TOKENS</Button>
-                      }
-                    </form>
-                </div>
-                {
-                  alert.status &&
-                  <Alert 
-                    type={alert.status}
-                    text={alert.message}
-                  /> 
-                }
-            </div>
+              {formData.isLoading
+                ? (
+                  <Loading />
+                  )
+                : (
+                  <Button type='submit' css={{ w: '100%' }}>
+                    SEND TOKENS
+                  </Button>
+                  )}
+            </form>
+          </div>
+          {alert.status && <Alert type={alert.status} text={alert.message} />}
         </div>
+      </div>
 
-        <div className='right'>
+      <div className='right'>
         {transactions.length &&
-          transactions.map((transaction) =>
-            <Transaction key={v4()} txdata={transaction}/>
-          )
-        }
-        </div>
+          transactions.map((transaction) => (
+            <Transaction key={v4()} txdata={transaction} />
+          ))}
+      </div>
     </div>
-  )}
+  )
+}
 
 export default App
