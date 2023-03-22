@@ -31,6 +31,6 @@ export default function Alert({type, text}) {
     <div className="alert" style={{backgroundColor: bg, color}}>
       {icon}
       <div className='text'  style={{marginLeft:'10px'}}>{text}</div>
-  </div>
+    </div>
   )
 }
